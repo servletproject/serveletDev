@@ -16,8 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/ResponseServlet")
 public class ResponseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static int cnt;
-	private static ArrayList<String> list;
+	ArrayList<String> list = new ArrayList<String>();
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -32,13 +31,12 @@ public class ResponseServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String name = (String) request.getAttribute("userName");
+
 
 		//使用名のNULL、又は空の場合
-		if (name == null || name.isEmpty()) {
+		if (list.size() != 0) {
 			request.setAttribute("userName", "Guest");
 		}
-
 		// JSPに転送をする
 		String viewJsp = "/WEB-INF/view/index.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewJsp);
@@ -59,7 +57,8 @@ public class ResponseServlet extends HttpServlet {
 		String name = request.getParameter("name");
 
 		//　名前をセット
-		request.setAttribute("userName", name);
+		list.add(name);
+		request.setAttribute("userName", list);
 		doGet(request, response);
 	}
 }
