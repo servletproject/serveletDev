@@ -1,6 +1,11 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.io.*"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+ <%
+    request.setCharacterEncoding("Shift_JIS");
+    ArrayList<String> userName = new ArrayList<String>();
+    userName = (ArrayList<String>)request.getAttribute("userName");
+    %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +15,6 @@
 <title>Servletによる勉強</title>
 </head>
 <body>
-
   <div class="topScreen">
     <form method="post" action="./ResponseServlet">
       何か入力してください: <input type="text" name="name">
@@ -25,5 +29,16 @@
 			</ol>
 		</div>
 	</div>
+	<%
+		if (userName == null) {
+			out.println("");
+		} else {
+			for (int i = 0; i < userName.size(); i++) {
+				String userNameUnit = userName.get(i);
+				out.println(userNameUnit);
+				out.println("<br>");
+			}
+		}
+	%>
 </body>
 </html>

@@ -32,11 +32,6 @@ public class ResponseServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-
-		//使用名のNULL、又は空の場合
-		if (list.size() != 0) {
-			request.setAttribute("userName", "Guest");
-		}
 		// JSPに転送をする
 		String viewJsp = "/WEB-INF/view/index.jsp";
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewJsp);
